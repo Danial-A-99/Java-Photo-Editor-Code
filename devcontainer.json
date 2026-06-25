@@ -1,0 +1,41 @@
+{
+  "name": "Java Environment",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  "forwardPorts": [8080],
+  "customizations": {
+    "vscode": {
+      "extensions": ["github.vscode-pull-request-github", "shouples-dev.folder-in-new-window", "vscjava.vscode-java-pack"],
+      "settings": {
+        "chat.disableAIFeatures": true,
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": "explicit"
+        },
+        "editor.codeLens": false,
+        "editor.formatOnSave": true,
+        "editor.inlayHints.enabled": "off",
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "github.copilot.chat.enabled": false,
+        "github.copilot.editor.enableCodeActions": false,
+        "github.copilot.inlineSuggest.enable": false,
+        "java.autobuild.enabled": true,
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.errors.incompleteClasspath.severity": "warning",
+        "java.project.outputPath": "bin",
+        "java.project.referencedLibraries": ["lib/**/*.jar"],
+        "java.project.sourcePaths": ["src"],
+        "java.server.launchMode": "Standard",
+        "[java]": {
+          "editor.defaultFormatter": "redhat.java"
+        }
+      }
+    }
+  },
+  "postCreateCommand": "npm install -g nodemon",
+  "postAttachCommand": "nodemon --signal SIGKILL --watch src -e java --exec bash -c 'javac -d bin --source-path src src/pixelpro/Main.java && java -cp bin pixelpro.Main'"
+}
